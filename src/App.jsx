@@ -7,14 +7,11 @@ function App() {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null,
   );
-  const navigate = useNavigate(); // 3. Инициализируй хук навигации
+  const navigate = useNavigate();
 
-  // 4. Следим за пользователем: если user стал null — гоним на логин
   useEffect(() => {
-    // Получаем текущий путь в браузере
     const currentPath = window.location.pathname;
 
-    // Редирект на логин только если юзера нет И мы НЕ на странице регистрации
     if (!user && currentPath !== "/register") {
       navigate("/login");
     }

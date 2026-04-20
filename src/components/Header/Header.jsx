@@ -10,12 +10,10 @@ const Header = ({ logout }) => {
     <S.Header>
       <Container>
         <S.HeaderBlock>
-          {/* Левая часть: Логотип */}
           <S.HeaderLogo>
             <img src="/icons/logo.svg" alt="Skypro.Wallet" />
           </S.HeaderLogo>
 
-          {/* Центральная часть: Навигация */}
           <S.HeaderNav>
             <S.NavLink to="/" $isActive={location.pathname === "/"}>
               Мои расходы
@@ -28,7 +26,6 @@ const Header = ({ logout }) => {
             </S.NavLink>
           </S.HeaderNav>
 
-          {/* Правая часть: Кнопка выхода */}
           <S.HeaderUser onClick={logout}>Выйти</S.HeaderUser>
         </S.HeaderBlock>
       </Container>

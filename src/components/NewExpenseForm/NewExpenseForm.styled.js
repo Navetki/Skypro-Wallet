@@ -44,7 +44,6 @@ export const Input = styled.input`
   }
 `;
 
-// ПРОВЕРЬ: этот компонент часто теряется при копировании
 export const CategoriesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -52,7 +51,6 @@ export const CategoriesGrid = styled.div`
   margin-top: 10px;
 `;
 
-// И ЭТОТ:
 export const CategoryItem = styled.button`
   display: flex;
   align-items: center;

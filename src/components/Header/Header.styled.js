@@ -10,7 +10,6 @@ export const Header = styled.header`
 export const HeaderBlock = styled.div`
   height: 80px;
   display: grid;
-  /* Сетка из 3-х колонок: края подстраиваются под контент, центр забирает всё место */
   grid-template-columns: auto 1fr auto;
   align-items: center;
 `;
@@ -27,7 +26,7 @@ export const HeaderLogo = styled.div`
 
 export const HeaderNav = styled.nav`
   display: flex;
-  justify-content: center; /* Центрируем навигацию по середине экрана */
+  justify-content: center;
   gap: 40px;
 `;
 
@@ -36,7 +35,6 @@ export const NavLink = styled(Link)`
   font-size: 16px;
   transition: all 0.2s ease;
 
-  /* Состояние из макета: фиолетовый с подчеркиванием, если активен */
   color: ${(props) => (props.$isActive ? "#7334EA" : "#000000")};
   font-weight: ${(props) => (props.$isActive ? "600" : "400")};
   border-bottom: ${(props) =>
@@ -52,7 +50,7 @@ export const NavLink = styled(Link)`
 export const HeaderUser = styled.button`
   background: none;
   border: none;
-  color: #000000; /* Изначально черная по макету */
+  color: #000000; 
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
@@ -60,6 +58,5 @@ export const HeaderUser = styled.button`
   padding: 0;
 
   &:hover {
-    color: #7334ea; /* Фиолетовый при наведении */
-  }
+    color: #7334ea; 
 `;

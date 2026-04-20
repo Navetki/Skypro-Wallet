@@ -20,14 +20,14 @@ export default function RegisterPage({ setUser }) {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("Клик сработал! Данные:", formData); // <--- Добавь это
+    console.log("Клик сработал! Данные:", formData);
     try {
       const data = await signUp(formData);
-      console.log("Ответ сервера:", data); // <--- И это
+      console.log("Ответ сервера:", data);
       setUser(data.user);
       navigate("/");
     } catch (err) {
-      console.error("Ошибка при регистрации:", err.message); // <--- И это
+      console.error("Ошибка при регистрации:", err.message);
       setError(err.message);
     }
   };

@@ -15,8 +15,6 @@ export const MainPage = ({ user, logout }) => {
     try {
       const data = await getTransactions({ token: user.token });
 
-      // ВНИМАНИЕ: API возвращает объект { transactions: [...] }
-      // Мы должны положить в стейт именно массив!
       if (data && data.transactions) {
         setTransactions(data.transactions);
       } else if (Array.isArray(data)) {
@@ -38,7 +36,6 @@ export const MainPage = ({ user, logout }) => {
       <Header logout={logout} user={user} />
 
       <S.FullWidthBackground>
-        {/* Container теперь внутри фона, он выровняет таблицу по линии логотипа */}
         <Container>
           <S.MainContent>
             <ExpenseTable

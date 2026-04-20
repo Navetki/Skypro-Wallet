@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import * as L from "../LoginPage/LoginPage.styled";
 
-// Копируем базовые стили
 export const Wrapper = L.Wrapper;
 export const Container = L.ContainerSignin;
 export const Modal = L.Modal;
@@ -11,7 +10,6 @@ export const ModalForm = L.ModalForm;
 export const ModalInput = L.ModalInput;
 export const ModalFormGroup = L.ModalFormGroup;
 
-// Тот самый ErrorText, которого нам не хватало
 export const ErrorText = styled.span`
   color: #f64c4c;
   font-size: 12px;
@@ -21,8 +19,6 @@ export const ErrorText = styled.span`
   text-align: left;
 `;
 
-// Исправляем кнопку: вместо расширения (которое ломается),
-// создаем её заново с нашими цветами
 export const ModalBtnSignup = styled.button`
   width: 100%;
   height: 46px;

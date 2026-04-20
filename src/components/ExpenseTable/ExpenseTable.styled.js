@@ -8,7 +8,6 @@ export const TableWrapper = styled.div`
   width: 100%;
 `;
 
-// УБЕДИСЬ, ЧТО ЭТОТ КОМПОНЕНТ ЕСТЬ:
 export const TableTitle = styled.h2`
   font-size: 20px;
   font-weight: 700;

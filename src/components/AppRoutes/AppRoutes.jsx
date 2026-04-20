@@ -8,10 +8,8 @@ export const AppRoutes = ({ user, setUser, logout }) => {
     <Routes>
       <Route path="/" element={<MainPage user={user} logout={logout} />} />
 
-      {/* Передаем setUser для входа */}
       <Route path="/login" element={<LoginPage setUser={setUser} />} />
 
-      {/* ОБЯЗАТЕЛЬНО передаем setUser сюда, чтобы регистрация работала до конца */}
       <Route path="/register" element={<RegisterPage setUser={setUser} />} />
     </Routes>
   );
