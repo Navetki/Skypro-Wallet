@@ -73,11 +73,7 @@ const NewExpenseForm = ({ token, refreshData }) => {
               $isActive={formData.category === cat.id}
               onClick={() => setFormData({ ...formData, category: cat.id })}
             >
-              <img
-                src={cat.icon}
-                alt={cat.label}
-                style={{ width: "20px", height: "20px" }}
-              />
+              <img src={cat.icon} alt={cat.label} />
               {cat.label}
             </S.CategoryItem>
           ))}

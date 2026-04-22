@@ -18,6 +18,7 @@ const Header = ({ logout }) => {
             <S.NavLink to="/" $isActive={location.pathname === "/"}>
               Мои расходы
             </S.NavLink>
+
             <S.NavLink
               to="/analysis"
               $isActive={location.pathname === "/analysis"}

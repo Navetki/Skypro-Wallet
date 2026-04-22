@@ -1,22 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
-
-export const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #F4F5F6;
-  }
-
- 
-  button, input, select {
-    font-family: 'Montserrat', sans-serif;
-  }
-`;
+import styled from "styled-components";
 
 export const Container = styled.div`
   max-width: 1440px;

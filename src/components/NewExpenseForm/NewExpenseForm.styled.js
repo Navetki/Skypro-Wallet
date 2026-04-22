@@ -56,14 +56,16 @@ export const CategoryItem = styled.button`
   align-items: center;
   gap: 10px;
   padding: 10px;
-  border: 1px solid ${(props) => (props.$isActive ? "#7334EA" : "#D1D1D6")};
-  background-color: ${(props) => (props.$isActive ? "#F8F7FF" : "#FFFFFF")};
+  background-color: ${(props) => (props.$isActive ? "#EBE5FF" : "#F4F5F6")};
+  color: ${(props) => (props.$isActive ? "#7334EA" : "#000000")};
+  border: 1px solid ${(props) => (props.$isActive ? "#7334EA" : "transparent")};
   border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
   img {
     width: 20px;
     height: 20px;
+    filter: ${(props) => (props.$isActive ? "none" : "grayscale(100%)")};
   }
 `;
 
