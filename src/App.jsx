@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./App.css";
 import { AppRoutes } from "./components/AppRoutes/AppRoutes";
+import { GlobalStyle } from "./GlobalStyle.styled";
 
 function App() {
   const [user, setUser] = useState(

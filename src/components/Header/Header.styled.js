@@ -32,14 +32,17 @@ export const HeaderNav = styled.nav`
 
 export const NavLink = styled(Link)`
   text-decoration: none;
-  font-size: 16px;
-  transition: all 0.2s ease;
-
-  color: ${(props) => (props.$isActive ? "#7334EA" : "#000000")};
-  font-weight: ${(props) => (props.$isActive ? "600" : "400")};
-  border-bottom: ${(props) =>
-    props.$isActive ? "2px solid #7334EA" : "2px solid transparent"};
+  color: #000000;
   padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+
+  ${(props) =>
+    props.$isActive &&
+    `
+    color: #7334EA;
+    border-bottom: 2px solid #7334EA;
+    font-weight: 600;
+  `}
 
   &:hover {
     color: #7334ea;
@@ -50,7 +53,7 @@ export const NavLink = styled(Link)`
 export const HeaderUser = styled.button`
   background: none;
   border: none;
-  color: #000000; 
+  color: #000000;
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
@@ -58,5 +61,6 @@ export const HeaderUser = styled.button`
   padding: 0;
 
   &:hover {
-    color: #7334ea; 
+    color: #7334ea;
+  }
 `;
