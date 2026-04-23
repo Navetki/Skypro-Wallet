@@ -1,36 +1,17 @@
-import { useState, useEffect, useCallback } from "react";
+import React from "react";
 import { Container } from "../../App.styled";
 import Header from "../../components/Header/Header";
 import ExpenseTable from "../../components/ExpenseTable/ExpenseTable";
 import NewExpenseForm from "../../components/NewExpenseForm/NewExpenseForm";
-import { getTransactions } from "../../services/api";
 import * as S from "./MainPage.styled";
 
-export const MainPage = ({ user, logout }) => {
-  const [transactions, setTransactions] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const fetchTransactions = useCallback(async () => {
-    if (!user?.token) return;
-    try {
-      const data = await getTransactions({ token: user.token });
-
-      if (data && data.transactions) {
-        setTransactions(data.transactions);
-      } else if (Array.isArray(data)) {
-        setTransactions(data);
-      }
-    } catch (error) {
-      console.error(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [user?.token]);
-
-  useEffect(() => {
-    fetchTransactions();
-  }, [fetchTransactions]);
-
+export const MainPage = ({
+  user,
+  logout,
+  transactions,
+  fetchTransactions,
+  isLoading,
+}) => {
   return (
     <S.PageWrapper>
       <Header logout={logout} user={user} />
