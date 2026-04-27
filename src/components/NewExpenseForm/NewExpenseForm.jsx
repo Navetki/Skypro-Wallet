@@ -22,30 +22,32 @@ const NewExpenseForm = ({ token, refreshData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.description.length < 4) {
-      Swal.fire({
-        title: "Ошибка!",
-        text: "Описание от 4 символов",
-        icon: "error",
-        confirmButtonColor: "#7334EA",
-      });
-      return;
-    }
+
+    if (!formData.sum || !formData.description) return;
+
     try {
       await postTransaction({
         token,
-        transactionData: { ...formData, sum: Number(formData.sum) },
+        transactionData: {
+          ...formData,
+          sum: Number(formData.sum),
+        },
       });
+
+      setTimeout(() => {
+        refreshData();
+      }, 300);
+
       setFormData({ ...formData, description: "", sum: "" });
-      setTimeout(() => refreshData(), 300);
+
       Swal.fire({
         title: "Готово!",
+        text: "Расход добавлен в таблицу",
         icon: "success",
-        timer: 2000,
-        showConfirmButton: false,
+        confirmButtonColor: "#7334EA",
       });
     } catch (error) {
-      Swal.fire("Ошибка", error.message, "error");
+      Swal.fire("Ошибка сервера", error.message, "error");
     }
   };
 

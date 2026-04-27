@@ -19,12 +19,18 @@ function App() {
       setIsLoading(false);
       return;
     }
-
     try {
       const data = await getTransactions({ token: user.token });
-      setTransactions(data.transactions || []);
+
+      const result = data.transactions || data;
+
+      if (Array.isArray(result)) {
+        setTransactions(result);
+      } else {
+        setTransactions([]);
+      }
     } catch (error) {
-      console.error("Ошибка при загрузке данных:", error.message);
+      console.error("Ошибка загрузки:", error.message);
     } finally {
       setIsLoading(false);
     }
