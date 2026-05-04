@@ -6,47 +6,77 @@ export async function signIn({ login, password }) {
     method: "POST",
     body: JSON.stringify({ login, password }),
   });
-  if (!response.ok) throw new Error("Ошибка входа");
+
+  if (response.status === 400) {
+    throw new Error("Неверный логин или пароль");
+  }
+  if (!response.ok) {
+    throw new Error("Ошибка сервера при входе");
+  }
+
   return await response.json();
 }
-
-// РЕГИСТРАЦИЯ
 export async function signUp({ login, name, password }) {
   const response = await fetch(userHost, {
     method: "POST",
     body: JSON.stringify({ login, name, password }),
   });
-  if (!response.ok) throw new Error("Ошибка регистрации");
+
+  if (response.status === 400) {
+    throw new Error("Пользователь с таким логином уже существует");
+  }
+  if (!response.ok) {
+    throw new Error("Ошибка при регистрации");
+  }
+
   return await response.json();
 }
 
-// ПОЛУЧИТЬ СПИСОК
 export async function getTransactions({ token }) {
   const response = await fetch(baseHost, {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   });
-  if (!response.ok) throw new Error("Ошибка загрузки");
+
+  if (response.status === 401) {
+    throw new Error("Срок действия сессии истек. Пожалуйста, войдите снова.");
+  }
+  if (!response.ok) {
+    throw new Error("Не удалось загрузить список расходов");
+  }
+
   return await response.json();
 }
 
-// ДОБАВИТЬ
 export async function postTransaction({ token, transactionData }) {
   const response = await fetch(baseHost, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
     body: JSON.stringify(transactionData),
   });
-  if (!response.ok) throw new Error("Ошибка добавления");
+
+  if (response.status === 401) {
+    throw new Error("Авторизация просрочена");
+  }
+  if (!response.ok) {
+    throw new Error("Ошибка при сохранении расхода");
+  }
+
   return await response.json();
 }
 
-// УДАЛИТЬ
 export async function deleteTransaction({ token, id }) {
   const response = await fetch(`${baseHost}/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
-  if (!response.ok) throw new Error("Ошибка удаления");
+
+  if (response.status === 401) {
+    throw new Error("Недостаточно прав для удаления");
+  }
+  if (!response.ok) {
+    throw new Error("Ошибка при удалении записи");
+  }
+
   return await response.json();
 }

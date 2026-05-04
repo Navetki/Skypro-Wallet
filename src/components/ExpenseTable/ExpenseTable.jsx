@@ -11,6 +11,7 @@ const categoryLabels = {
   education: "Образование",
   others: "Другое",
 };
+
 const ExpenseTable = ({ transactions, isLoading, token, refreshData }) => {
   const handleDelete = async (id) => {
     const result = await Swal.fire({
@@ -34,7 +35,6 @@ const ExpenseTable = ({ transactions, isLoading, token, refreshData }) => {
 
   return (
     <S.TableWrapper>
-      <S.TableTitle>Таблица расходов</S.TableTitle>
       <S.Table>
         <thead>
           <tr>

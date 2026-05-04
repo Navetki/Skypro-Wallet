@@ -1,11 +1,8 @@
 import styled from "styled-components";
 
 export const TableWrapper = styled.div`
-  background-color: #ffffff;
-  border-radius: 30px;
-  padding: 30px;
-  box-shadow: 0px 4px 20px -12px rgba(0, 0, 0, 0.13);
   width: 100%;
+  overflow-x: auto;
 `;
 
 export const TableTitle = styled.h2`
@@ -19,6 +16,7 @@ export const TableTitle = styled.h2`
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 `;
 
 export const Th = styled.th`
@@ -31,11 +29,16 @@ export const Th = styled.th`
 `;
 
 export const Td = styled.td`
-  padding: 16px 12px;
-  font-size: 14px;
-  color: #000000;
-  border-bottom: 1px solid #f1f5f9;
-  font-weight: ${(props) => (props.$isBold ? "700" : "400")};
+  padding: 12px 8px;
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
+  white-space: normal; /
+  vertical-align: middle;
+  
+  
+  &:nth-child(2) {
+    width: 40%; 
+  }
 `;
 
 export const DeleteBtn = styled.button`

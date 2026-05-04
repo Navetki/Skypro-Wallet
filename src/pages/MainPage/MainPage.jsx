@@ -1,53 +1,52 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { Container } from "../../App.styled";
 import Header from "../../components/Header/Header";
 import ExpenseTable from "../../components/ExpenseTable/ExpenseTable";
 import NewExpenseForm from "../../components/NewExpenseForm/NewExpenseForm";
-import { getTransactions } from "../../services/api";
 import * as S from "./MainPage.styled";
 
-export const MainPage = ({ user, logout }) => {
-  const [transactions, setTransactions] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const fetchTransactions = useCallback(async () => {
-    if (!user?.token) return;
-    try {
-      const data = await getTransactions({ token: user.token });
-
-      if (data && data.transactions) {
-        setTransactions(data.transactions);
-      } else if (Array.isArray(data)) {
-        setTransactions(data);
-      }
-    } catch (error) {
-      console.error(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [user?.token]);
-
-  useEffect(() => {
-    fetchTransactions();
-  }, [fetchTransactions]);
-
+export const MainPage = ({
+  user,
+  logout,
+  transactions,
+  fetchTransactions,
+  isLoading,
+}) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredTransactions = transactions.filter((t) =>
+    t.description.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
   return (
     <S.PageWrapper>
       <Header logout={logout} user={user} />
-
       <S.FullWidthBackground>
         <Container>
           <S.MainContent>
-            <ExpenseTable
-              transactions={transactions}
-              isLoading={isLoading}
-              token={user?.token}
-              refreshData={fetchTransactions}
-            />
-            <NewExpenseForm
-              token={user?.token}
-              refreshData={fetchTransactions}
-            />
+            <section>
+              <S.TableHeader>
+                <S.TableTitle>Таблица расходов</S.TableTitle>
+                <S.SearchInput
+                  type="text"
+                  placeholder="Поиск по описанию..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </S.TableHeader>
+
+              <ExpenseTable
+                transactions={filteredTransactions}
+                isLoading={isLoading}
+                token={user?.token}
+                refreshData={fetchTransactions}
+              />
+            </section>
+
+            <section>
+              <NewExpenseForm
+                token={user?.token}
+                refreshData={fetchTransactions}
+              />
+            </section>
           </S.MainContent>
         </Container>
       </S.FullWidthBackground>
