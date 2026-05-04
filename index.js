@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         sortQuery: Joi.string().valid("date", "sum").optional(),
         filterQuery: Joi.string()
           .pattern(
-            /^(food|transport|housing|joy|education|others)(,(food|transport|housing|joy|education|others))*$/
+            /^(food|transport|housing|joy|education|others)(,(food|transport|housing|joy|education|others))*$/,
           )
           .optional(),
       });
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
             filterQuery: value.filterQuery?.split(","),
             sortQuery: value.sortQuery,
           },
-        })
+        }),
       );
     }
 
@@ -54,9 +54,7 @@ export default async function handler(req, res) {
     });
 
     if (req.method === "POST") {
-      const data = JSON.parse(req.body);
-
-      const { value, error } = schema.validate(data);
+      const { value, error } = schema.validate(JSON.parse(req.body));
 
       if (error)
         return res.status(400).json({ error: error.details[0].message });

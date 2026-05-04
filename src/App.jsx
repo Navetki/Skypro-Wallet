@@ -19,18 +19,19 @@ function App() {
       setIsLoading(false);
       return;
     }
+
     try {
-      const data = await getTransactions({ token: user.token });
+      const response = await getTransactions({ token: user.token });
 
-      const result = data.transactions || data;
+      const fetchedTransactions = response.transactions || response;
 
-      if (Array.isArray(result)) {
-        setTransactions(result);
+      if (Array.isArray(fetchedTransactions)) {
+        setTransactions(fetchedTransactions);
       } else {
         setTransactions([]);
       }
     } catch (error) {
-      console.error("Ошибка загрузки:", error.message);
+      console.error("Ошибка загрузки транзакций:", error.message);
     } finally {
       setIsLoading(false);
     }
@@ -42,7 +43,7 @@ function App() {
 
   useEffect(() => {
     const currentPath = window.location.pathname;
-    if (!user && currentPath !== "/register") {
+    if (!user && currentPath !== "/register" && currentPath !== "/login") {
       navigate("/login");
     }
   }, [user, navigate]);

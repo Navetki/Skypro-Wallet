@@ -52,7 +52,9 @@ const ExpenseTable = ({ transactions, isLoading, token, refreshData }) => {
                 <S.Td>{new Date(item.date).toLocaleDateString()}</S.Td>
                 <S.Td>{item.description}</S.Td>
                 <S.Td>{categoryLabels[item.category] || item.category}</S.Td>
-                <S.Td $isBold>{item.sum} ₽</S.Td>
+                <S.Td $isBold>
+                  {Number(item.sum).toLocaleString("ru-RU")} ₽
+                </S.Td>
                 <S.Td>
                   <S.DeleteBtn onClick={() => handleDelete(item._id)}>
                     🗑 Удалить

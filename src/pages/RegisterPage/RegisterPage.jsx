@@ -20,15 +20,14 @@ export default function RegisterPage({ setUser }) {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("Клик сработал! Данные:", formData);
+    setError(null);
+
     try {
-      const data = await signUp(formData);
-      console.log("Ответ сервера:", data);
-      setUser(data.user);
+      const userData = await signUp(formData);
+      setUser(userData.user);
       navigate("/");
-    } catch (err) {
-      console.error("Ошибка при регистрации:", err.message);
-      setError(err.message);
+    } catch (error) {
+      setError(error.message);
     }
   };
 
@@ -47,6 +46,7 @@ export default function RegisterPage({ setUser }) {
                 onChange={handleInputChange}
                 type="text"
                 placeholder="Имя"
+                required
               />
               <S.ModalInput
                 name="login"
@@ -54,6 +54,7 @@ export default function RegisterPage({ setUser }) {
                 onChange={handleInputChange}
                 type="email"
                 placeholder="Эл. почта"
+                required
               />
               <S.ModalInput
                 name="password"
@@ -61,14 +62,12 @@ export default function RegisterPage({ setUser }) {
                 onChange={handleInputChange}
                 type="password"
                 placeholder="Пароль"
+                required
               />
 
               {error && <S.ErrorText>{error}</S.ErrorText>}
 
-              <S.ModalBtnSignup
-                type="submit"
-                // disabled={!formData.login || !formData.password}//
-              >
+              <S.ModalBtnSignup type="submit">
                 Зарегистрироваться
               </S.ModalBtnSignup>
 
