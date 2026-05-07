@@ -27,3 +27,5 @@
 
 Работа велась с использованием доски **Kaiten**.
 https://navetki.kaiten.ru/space/766535/boards
+
+final_test_victory_777@mail.ru

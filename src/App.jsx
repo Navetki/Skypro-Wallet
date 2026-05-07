@@ -5,10 +5,10 @@ import { GlobalStyle } from "./GlobalStyle.styled";
 import { getTransactions } from "./services/api";
 
 function App() {
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null,
-  );
-
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -38,8 +38,10 @@ function App() {
   }, [user?.token]);
 
   useEffect(() => {
-    fetchTransactions();
-  }, [fetchTransactions]);
+    if (user) {
+      fetchTransactions();
+    }
+  }, [user, fetchTransactions]);
 
   useEffect(() => {
     const currentPath = window.location.pathname;

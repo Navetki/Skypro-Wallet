@@ -2,9 +2,10 @@ import styled from "styled-components";
 export const CalendarWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 480px;
+  flex: 1;
   width: 100%;
   position: relative;
+  min-height: 400px;
 `;
 
 export const DaysHeader = styled.div`
@@ -67,9 +68,9 @@ export const Day = styled.div`
   ${(props) =>
     (props.$isStart || props.$isEnd) &&
     `
-    background-color: #7334EA !important;
-    color: #FFFFFF !important;
-    border-radius: 50% !important;
+    background-color: #7334EA;
+    color: #FFFFFF;
+    border-radius: 50%;
   `}
 
   &:hover {

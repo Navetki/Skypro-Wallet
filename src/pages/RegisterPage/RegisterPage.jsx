@@ -22,6 +22,11 @@ export default function RegisterPage({ setUser }) {
     e.preventDefault();
     setError(null);
 
+    if (formData.password.length < 4) {
+      setError("Пароль должен быть не короче 4 символов");
+      return;
+    }
+
     try {
       const userData = await signUp(formData);
       setUser(userData.user);
@@ -43,6 +48,7 @@ export default function RegisterPage({ setUser }) {
               <S.ModalInput
                 name="name"
                 $isError={!!error}
+                value={formData.name}
                 onChange={handleInputChange}
                 type="text"
                 placeholder="Имя"
@@ -51,6 +57,7 @@ export default function RegisterPage({ setUser }) {
               <S.ModalInput
                 name="login"
                 $isError={!!error}
+                value={formData.login}
                 onChange={handleInputChange}
                 type="email"
                 placeholder="Эл. почта"
@@ -59,6 +66,7 @@ export default function RegisterPage({ setUser }) {
               <S.ModalInput
                 name="password"
                 $isError={!!error}
+                value={formData.password}
                 onChange={handleInputChange}
                 type="password"
                 placeholder="Пароль"

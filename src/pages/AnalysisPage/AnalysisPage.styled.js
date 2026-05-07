@@ -20,21 +20,20 @@ export const Title = styled.h1`
 
 export const AnalysisContent = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 32px;
-
-  align-items: stretch;
   width: 100%;
   margin-top: 32px;
 `;
+
 export const Sidebar = styled.aside`
   width: 368px;
   flex-shrink: 0;
-  display: flex;
 `;
 
 export const MainChartArea = styled.section`
   flex: 1;
-  display: flex;
 `;
 
 export const Card = styled.div`
@@ -43,6 +42,8 @@ export const Card = styled.div`
   border-radius: 30px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   width: 100%;
+
+  height: 480px;
   display: flex;
   flex-direction: column;
 `;

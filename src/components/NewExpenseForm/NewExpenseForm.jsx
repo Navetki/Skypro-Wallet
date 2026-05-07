@@ -58,11 +58,12 @@ const NewExpenseForm = ({ token, refreshData }) => {
         <label>Описание</label>
         <S.Input
           required
+          minLength={4}
           value={formData.description}
           onChange={(e) =>
             setFormData({ ...formData, description: e.target.value })
           }
-          placeholder="На что потратили?"
+          placeholder="На что потратили? (минимум 4 символа)"
         />
       </S.InputGroup>
       <S.InputGroup>
