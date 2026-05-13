@@ -14,11 +14,11 @@ const LoginPage = ({ setUser }) => {
     setError(null);
 
     try {
-      const data = await signIn({ login, password });
-      setUser(data.user);
+      const userData = await signIn({ login, password });
+      setUser(userData.user);
       navigate("/");
-    } catch (err) {
-      setError(err.message);
+    } catch (error) {
+      setError(error.message);
     }
   };
 
@@ -45,17 +45,7 @@ const LoginPage = ({ setUser }) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
 
-              {error && (
-                <p
-                  style={{
-                    color: "red",
-                    fontSize: "12px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  {error}
-                </p>
-              )}
+              {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
 
               <S.ModalBtnEnter type="submit">Войти</S.ModalBtnEnter>
 

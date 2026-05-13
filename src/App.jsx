@@ -5,10 +5,10 @@ import { GlobalStyle } from "./GlobalStyle.styled";
 import { getTransactions } from "./services/api";
 
 function App() {
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null,
-  );
-
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,30 +19,33 @@ function App() {
       setIsLoading(false);
       return;
     }
+
     try {
-      const data = await getTransactions({ token: user.token });
+      const response = await getTransactions({ token: user.token });
 
-      const result = data.transactions || data;
+      const fetchedTransactions = response.transactions || response;
 
-      if (Array.isArray(result)) {
-        setTransactions(result);
+      if (Array.isArray(fetchedTransactions)) {
+        setTransactions(fetchedTransactions);
       } else {
         setTransactions([]);
       }
     } catch (error) {
-      console.error("Ошибка загрузки:", error.message);
+      console.error("Ошибка загрузки транзакций:", error.message);
     } finally {
       setIsLoading(false);
     }
   }, [user?.token]);
 
   useEffect(() => {
-    fetchTransactions();
-  }, [fetchTransactions]);
+    if (user) {
+      fetchTransactions();
+    }
+  }, [user, fetchTransactions]);
 
   useEffect(() => {
     const currentPath = window.location.pathname;
-    if (!user && currentPath !== "/register") {
+    if (!user && currentPath !== "/register" && currentPath !== "/login") {
       navigate("/login");
     }
   }, [user, navigate]);

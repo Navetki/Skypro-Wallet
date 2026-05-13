@@ -7,29 +7,28 @@ export async function signIn({ login, password }) {
     body: JSON.stringify({ login, password }),
   });
 
-  if (response.status === 400) {
-    throw new Error("Неверный логин или пароль");
-  }
+  const result = await response.json();
   if (!response.ok) {
-    throw new Error("Ошибка сервера при входе");
+    throw new Error(result.error || "Ошибка при входе");
   }
 
-  return await response.json();
+  localStorage.setItem("user", JSON.stringify(result.user));
+  return result;
 }
+
 export async function signUp({ login, name, password }) {
   const response = await fetch(userHost, {
     method: "POST",
     body: JSON.stringify({ login, name, password }),
   });
 
-  if (response.status === 400) {
-    throw new Error("Пользователь с таким логином уже существует");
-  }
+  const result = await response.json();
   if (!response.ok) {
-    throw new Error("Ошибка при регистрации");
+    throw new Error(result.error || "Ошибка при регистрации");
   }
 
-  return await response.json();
+  localStorage.setItem("user", JSON.stringify(result.user));
+  return result;
 }
 
 export async function getTransactions({ token }) {
@@ -51,18 +50,24 @@ export async function getTransactions({ token }) {
 export async function postTransaction({ token, transactionData }) {
   const response = await fetch(baseHost, {
     method: "POST",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+
     body: JSON.stringify(transactionData),
   });
 
+  const result = await response.json();
+
   if (response.status === 401) {
-    throw new Error("Авторизация просрочена");
-  }
-  if (!response.ok) {
-    throw new Error("Ошибка при сохранении расхода");
+    throw new Error("Авторизация просрочена. Войдите заново.");
   }
 
-  return await response.json();
+  if (!response.ok) {
+    throw new Error(result.error || "Ошибка при сохранении расхода");
+  }
+
+  return result;
 }
 
 export async function deleteTransaction({ token, id }) {

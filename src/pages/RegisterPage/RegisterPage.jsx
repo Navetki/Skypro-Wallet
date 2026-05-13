@@ -20,15 +20,19 @@ export default function RegisterPage({ setUser }) {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("Клик сработал! Данные:", formData);
+    setError(null);
+
+    if (formData.password.length < 4) {
+      setError("Пароль должен быть не короче 4 символов");
+      return;
+    }
+
     try {
-      const data = await signUp(formData);
-      console.log("Ответ сервера:", data);
-      setUser(data.user);
+      const userData = await signUp(formData);
+      setUser(userData.user);
       navigate("/");
-    } catch (err) {
-      console.error("Ошибка при регистрации:", err.message);
-      setError(err.message);
+    } catch (error) {
+      setError(error.message);
     }
   };
 
@@ -44,31 +48,34 @@ export default function RegisterPage({ setUser }) {
               <S.ModalInput
                 name="name"
                 $isError={!!error}
+                value={formData.name}
                 onChange={handleInputChange}
                 type="text"
                 placeholder="Имя"
+                required
               />
               <S.ModalInput
                 name="login"
                 $isError={!!error}
+                value={formData.login}
                 onChange={handleInputChange}
                 type="email"
                 placeholder="Эл. почта"
+                required
               />
               <S.ModalInput
                 name="password"
                 $isError={!!error}
+                value={formData.password}
                 onChange={handleInputChange}
                 type="password"
                 placeholder="Пароль"
+                required
               />
 
               {error && <S.ErrorText>{error}</S.ErrorText>}
 
-              <S.ModalBtnSignup
-                type="submit"
-                // disabled={!formData.login || !formData.password}//
-              >
+              <S.ModalBtnSignup type="submit">
                 Зарегистрироваться
               </S.ModalBtnSignup>
 

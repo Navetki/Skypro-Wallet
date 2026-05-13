@@ -118,3 +118,10 @@ export const ModalFormGroup = styled.div`
     text-decoration: underline;
   }
 `;
+export const ErrorMessage = styled.p`
+  color: #f44336;
+  font-size: 12px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-align: center;
+`;

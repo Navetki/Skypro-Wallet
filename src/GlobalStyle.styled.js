@@ -266,7 +266,7 @@ export const GlobalStyle = createGlobalStyle`
   line-height: 1;
   color: #ffffff;
   float: right;
-  text-decoration: none !important;
+  text-decoration: none;
 }
 
 .subttl {
@@ -679,7 +679,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   .form-new__create a,
   .form-new__create {
-    text-decoration: none !important;
+    text-decoration: none;
   }
 
   .pop-browse__block {
